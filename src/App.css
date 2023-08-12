@@ -1,6 +1,3 @@
-/*Header will have it's own row
-Content will be split into two sections - current and past 30 days. Past 30 days will be larger to fit the graph
-Footer will have it's own row*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap');
 
 .grid-container {
@@ -14,6 +11,8 @@ Footer will have it's own row*/
   grid-template-rows: 10% 70% auto;
   gap: 50px;
 }
+
+/* These rules determine the column size for each component in the dashboard layout*/
 .grid-container > div:nth-child(1) {
   grid-column: 1 / span 12;
 }
@@ -27,20 +26,11 @@ Footer will have it's own row*/
   grid-column: 1 / span 12;
 }
 
-.header {
-
-}
-
 .currentPrices {
   text-align: center;
 }
-
 .last30DaysOfPrices {
   text-align: center;
-}
-
-.footer {
-
 }
 
 .card {
