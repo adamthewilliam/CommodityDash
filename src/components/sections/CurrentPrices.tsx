@@ -1,6 +1,7 @@
 import { useQuery} from '@tanstack/react-query'
 import { LatestRateResponse } from '../../interfaces/LatestRateResponse';
 import axios from '../../http-common';
+import { forEach, omit } from 'lodash'
 import CurrentPricesTable from './CurrentPricesTable';
 
 const API_KEY = process.env.REACT_APP_COMMODITIES_API_ACCESS_KEY;
@@ -12,12 +13,10 @@ function useCurrentPrices() {
 
             // All commodity rates need to be divided by 1
             // Also I don't need the rate of the USD
-            data.rates = Object.fromEntries(
-                Object.entries(data.rates).map(([commodity, commodityValue]: [string, string]) => [
-                  commodity,
-                  (1 / Number(commodityValue)).toFixed(2)
-                ])
-              );
+            data.rates = forEach(data.rates, (commodityValue, commodity) => {
+                data.rates[commodity] = (1 / Number(commodityValue)).toFixed(2)
+            });
+            data.rates = omit(data.rates, ['USD']);
 
         return data;
     });
@@ -28,7 +27,7 @@ function convertTimestampToFormattedDatetime(timestamp?: string): string | undef
         return undefined;
     }
 
-    const dateTime = new Date(timestamp);
+    const dateTime = new Date(Number(timestamp) * 1000);
 
     if(isNaN(dateTime.getTime())) {
         return undefined;

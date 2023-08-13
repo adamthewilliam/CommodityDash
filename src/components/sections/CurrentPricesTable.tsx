@@ -10,7 +10,7 @@ export default function CurrentPricesTable({data}: CurrentPricesTableProps) {
 
     return (
         <div>
-            <table className="grid-table">
+            <table className="grid-table styled-table">
                 <thead>
                     <tr>
                         <th>Commodity</th>
