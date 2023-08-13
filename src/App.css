@@ -39,7 +39,7 @@
   background: #1e1e1e;
 }
 
-.card-title {
+.text-center {
   text-align: center;
 }
 
@@ -61,4 +61,5 @@
 }
 .grid-table > tbody > tr > td {
   width:100%;
+  text-align: center;
 }
