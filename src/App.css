@@ -82,11 +82,9 @@
 .styled-table tbody tr {
   border-bottom: 1px solid #a8a8a8;
 }
-
 .styled-table tbody tr:nth-of-type(even) {
   background-color: #323230;
 }
-
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid #323230;
 }
