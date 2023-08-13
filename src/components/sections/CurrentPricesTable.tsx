@@ -1,11 +1,13 @@
 import { LatestRateResponse } from "../../interfaces/LatestRateResponse";
 
 interface CurrentPricesTableProps {
-    data?: LatestRateResponse;
+    data: LatestRateResponse;
 }
 
 export default function CurrentPricesTable({data}: CurrentPricesTableProps) {
     console.log(data);
+    console.log(Array.isArray(data.rates));
+
     return (
         <div>
             <table className="grid-table">
@@ -16,14 +18,12 @@ export default function CurrentPricesTable({data}: CurrentPricesTableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.rates?.map(rate => {
-                        return (
-                            <tr key={rate.currencyValue}>
-                                <td>{rate.commodity}</td>
-                                <td>${rate.currencyValue}</td>
-                            </tr>
-                        );
-                    })}
+                    {Object.entries(data.rates).map(([commodity, commodityValue]) => (
+                        <tr key={commodity}>
+                            <td>{commodity}</td>
+                            <td>{commodityValue}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

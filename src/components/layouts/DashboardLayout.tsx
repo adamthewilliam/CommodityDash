@@ -15,6 +15,7 @@ const queryClient = new QueryClient({
         queries: {
             cacheTime: 90000,
             staleTime: 60000,
+            refetchInterval: 70000
         }
     }});
 

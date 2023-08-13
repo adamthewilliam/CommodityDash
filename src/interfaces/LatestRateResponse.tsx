@@ -3,6 +3,6 @@ import { Rate } from "./Rate";
 
 export interface LatestRateResponse extends BaseResponse {
     timestamp: string;
-    rates: Array<Rate>;
+    rates: Rate;
     date: string;
 }
