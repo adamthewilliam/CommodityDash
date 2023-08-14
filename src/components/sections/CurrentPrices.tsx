@@ -4,6 +4,7 @@ import axios from '../../http-common';
 import _ from 'lodash';
 import CurrentPricesTable from './CurrentPricesTable';
 import {convertTimestampToFormattedDatetime } from '../../helpers'
+import CurrentPricesProps from '../../interfaces/CurrentPricesProps';
 
 const API_KEY = process.env.REACT_APP_COMMODITIES_API_ACCESS_KEY;
 
@@ -23,7 +24,7 @@ function useCurrentPrices() {
     });
 }
 
-export default function CurrentPrices() {
+export default function CurrentPrices({updateCommoditySymbolState}: CurrentPricesProps) {
     const { status, data, error, isFetching } = useCurrentPrices();
 
     const dateTime = convertTimestampToFormattedDatetime(data?.timestamp);
@@ -34,7 +35,7 @@ export default function CurrentPrices() {
             <h6 className="text-center">Last updated: {dateTime}</h6>
 
             {status === "loading" ? ("loading...") : error instanceof Error ? (<span>Error: {error.message}</span>) : !data || !data.rates ? ("No data available"): (
-                <CurrentPricesTable data={data}/>
+                <CurrentPricesTable data={data} updateCommoditySymbolState={updateCommoditySymbolState}/>
             )}
             <div> {isFetching ? "Background updating..." : " "}</div>
         </div>

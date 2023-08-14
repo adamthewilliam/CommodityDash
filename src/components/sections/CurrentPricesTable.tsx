@@ -1,12 +1,17 @@
 import { LatestRateResponse } from "../../interfaces/LatestRateResponse";
+import CurrentPricesProps from "../../interfaces/CurrentPricesProps";
 
-interface CurrentPricesTableProps {
+interface CurrentPricesTableProps extends CurrentPricesProps {
     data: LatestRateResponse;
 }
 
-export default function CurrentPricesTable({data}: CurrentPricesTableProps) {
+export default function CurrentPricesTable({data, updateCommoditySymbolState}: CurrentPricesTableProps) {
     console.log(data);
     console.log(Array.isArray(data.rates));
+
+    const handleButtonClick = (commoditySymbol: string) => {
+        updateCommoditySymbolState(commoditySymbol);
+    }
 
     return (
         <div>
@@ -22,6 +27,7 @@ export default function CurrentPricesTable({data}: CurrentPricesTableProps) {
                         <tr key={commodity}>
                             <td>{commodity}</td>
                             <td>{commodityValue}</td>
+                            <td><button onClick={() => handleButtonClick(commodity)}></button></td>
                         </tr>
                     ))}
                 </tbody>
