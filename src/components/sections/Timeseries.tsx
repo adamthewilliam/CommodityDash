@@ -3,7 +3,6 @@ import axios from '../../http-common';
 import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 import { getDateNDaysAgo } from '../../helpers'
 import _ from 'lodash';
-import RechartsTimeseries from './RechartsTimeseries';
 import { MappedTimeseriesData } from '../../interfaces/MappedTimeseriesData';
 import ApexZoomableTimeseries from './ApexZoomableTimeseries';
 
