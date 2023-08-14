@@ -1,7 +1,7 @@
 import CurrentPrices from "../sections/CurrentPrices";
 import Footer from "../sections/Footer";
 import Header from "../sections/Header";
-import Last30DaysPrices from "../sections/Last30DaysPrices";
+import Timeseries from "../sections/Timeseries";
 
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 
@@ -25,7 +25,7 @@ export default function DashboardLayout() {
             <Header/>
             <QueryClientProvider client={queryClient}>
                 <CurrentPrices/>
-                <Last30DaysPrices/>
+                <Timeseries symbol="WTIOIL"/>
             </QueryClientProvider>
             <Footer></Footer>
         </div>
