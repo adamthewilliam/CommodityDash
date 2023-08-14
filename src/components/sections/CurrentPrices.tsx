@@ -1,7 +1,7 @@
 import { useQuery} from '@tanstack/react-query'
 import { LatestRateResponse } from '../../interfaces/LatestRateResponse';
 import axios from '../../http-common';
-import { forEach, omit } from 'lodash'
+import _ from 'lodash';
 import CurrentPricesTable from './CurrentPricesTable';
 import {convertTimestampToFormattedDatetime } from '../../helpers'
 
@@ -14,10 +14,10 @@ function useCurrentPrices() {
 
             // All commodity rates need to be divided by 1
             // Also I don't need the rate of the USD
-            data.rates = forEach(data.rates, (commodityValue, commodity) => {
+            data.rates = _.forEach(data.rates, (commodityValue, commodity) => {
                 data.rates[commodity] = (1 / Number(commodityValue)).toFixed(2)
             });
-            data.rates = omit(data.rates, ['USD']);
+            data.rates = _.omit(data.rates, ['USD']);
 
         return data;
     });

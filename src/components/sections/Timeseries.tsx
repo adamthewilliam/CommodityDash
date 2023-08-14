@@ -2,7 +2,7 @@ import { useQuery} from '@tanstack/react-query'
 import axios from '../../http-common';
 import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 import { getDateNDaysAgo } from '../../helpers'
-import { forEach, map} from 'lodash'
+import _ from 'lodash';
 import RechartsTimeseries from './RechartsTimeseries';
 import { MappedTimeseriesData } from '../../interfaces/MappedTimeseriesData';
 import ApexZoomableTimeseries from './ApexZoomableTimeseries';
@@ -16,8 +16,8 @@ function useTimeseries(startDate: string, endDate: string, symbol: string) {
 
             // All commodity rates need to be divided by 1
             // Also I don't need the rate of the USD
-            data.rates = forEach(data.rates, (date) => {
-                forEach(date, (value, commodity) => {
+            data.rates = _.forEach(data.rates, (date) => {
+                _.forEach(date, (value, commodity) => {
                         date[commodity] = (1 / Number(value)).toFixed(2);
                 })
             });
@@ -25,11 +25,11 @@ function useTimeseries(startDate: string, endDate: string, symbol: string) {
         console.log(data);
 
         return data;
-    });
+    }, {cacheTime: 86400000}); // Only refresh cache every 24 hrs
 }
 
 function mapRatesToDataStructure(timeSeriesResponse: TimeSeriesResponse): MappedTimeseriesData[] {
-    return map(timeSeriesResponse.rates, (commodities, date) => {
+    return _.map(timeSeriesResponse.rates, (commodities, date) => {
       const dataObject: MappedTimeseriesData = { date: date };
       for (const commodity in commodities) {
         dataObject[commodity] = Number(commodities[commodity]);

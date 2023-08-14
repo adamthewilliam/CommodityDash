@@ -19,7 +19,6 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "recharts": "^2.7.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

@@ -1,5 +1,3 @@
-import {times} from 'lodash'
-
 export function convertTimestampToFormattedDatetime(timestamp?: string): string | undefined {
     if(!timestamp) {
         return undefined;
@@ -14,16 +12,6 @@ export function convertTimestampToFormattedDatetime(timestamp?: string): string 
     return dateTime.toLocaleString();
 }   
 
-export function generateLast30Days(): string[] {
-    const today = new Date();
-    const dates = times(30, (index) => {
-      const date = new Date(today);
-      date.setDate(date.getDate() - index);
-      return date.toISOString().slice(0, 10);
-    });
-    return dates;
-  }
-  
 export function getDateNDaysAgo(numDays: number): string {
   const today = new Date();
   today.setDate(today.getDate() - numDays);
@@ -40,7 +28,6 @@ export function getDatesInRange(startDate: Date, endDate: Date): string[] {
   const currentDate = startDate;
 
   while (currentDate <= endDate) {
-
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
