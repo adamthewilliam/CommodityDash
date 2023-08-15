@@ -9,7 +9,8 @@ import ApexZoomableTimeseries from './ApexZoomableTimeseries';
 const API_KEY = process.env.REACT_APP_COMMODITIES_API_ACCESS_KEY;
 
 function useTimeseries(startDate: string, endDate: string, symbol: string) {
-    return useQuery(["timeseries"], async (): Promise<TimeSeriesResponse> => {
+    /* symbol is used as a query key to cache a timeseries response. This means we will cache a timeseries response for each symbol */
+    return useQuery(["timeseries", [symbol]], async (): Promise<TimeSeriesResponse> => {
         const { data }: {data: TimeSeriesResponse} = await axios.get(`/timeseries?access_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}&base=USD&symbols=${symbol}`)
             .then((response => response.data));
 
