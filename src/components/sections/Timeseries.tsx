@@ -55,7 +55,7 @@ export default function Timeseries({commoditySymbol}: TimeseriesProps) {
     }
 
     return (
-        <div className="card">
+        <div className="timeseries card">
             <h2 className="text-center">Past 30 Days</h2>
             {status === "loading" ? ("Loading...") : error instanceof Error ? (<span>Error: {error.message}</span>) : !data || !data.rates ? ("No data available"): (
             <ApexZoomableTimeseries commoditySymbol={commoditySymbol} data={mappedData}/>)}

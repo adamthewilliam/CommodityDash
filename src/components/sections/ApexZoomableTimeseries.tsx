@@ -26,7 +26,8 @@ export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoom
     const options = {
         chart: {
           id: 'basic-bar',
-          stacked: false
+          stacked: false,
+          height: '100%'
         },
         dataLabels: {
             enabled: false

@@ -32,7 +32,7 @@ export default function CurrentPrices({updateCommoditySymbolState}: CurrentPrice
     const dateTime = convertTimestampToFormattedDatetime(data?.timestamp);
     
     return (
-        <div className="card">
+        <div className="currentPrices card">
             <h2 className="text-center">Current Prices</h2>
             <h5 className="text-center">Last updated: {dateTime}</h5>
 
