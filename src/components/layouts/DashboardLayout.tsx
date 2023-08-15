@@ -32,7 +32,7 @@ export default function DashboardLayout() {
             <Header/>
             <QueryClientProvider client={queryClient}>
                 <CurrentPrices updateCommoditySymbolState={updateCommoditySymbolState}/>
-                <Timeseries symbol={commoditySymbol}/>
+                <Timeseries commoditySymbol={commoditySymbol}/>
             </QueryClientProvider>
             <Footer></Footer>
         </div>

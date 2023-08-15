@@ -8,10 +8,10 @@ import ApexZoomableTimeseries from './ApexZoomableTimeseries';
 
 const API_KEY = process.env.REACT_APP_COMMODITIES_API_ACCESS_KEY;
 
-function useTimeseries(startDate: string, endDate: string, symbol: string) {
+function useTimeseries(startDate: string, endDate: string, commoditySymbol: string) {
     /* symbol is used as a query key to cache a timeseries response. This means we will cache a timeseries response for each symbol */
-    return useQuery(["timeseries", [symbol]], async (): Promise<TimeSeriesResponse> => {
-        const { data }: {data: TimeSeriesResponse} = await axios.get(`/timeseries?access_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}&base=USD&symbols=${symbol}`)
+    return useQuery(["timeseries", [commoditySymbol]], async (): Promise<TimeSeriesResponse> => {
+        const { data }: {data: TimeSeriesResponse} = await axios.get(`/timeseries?access_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}&base=USD&symbols=${commoditySymbol}`)
             .then((response => response.data));
 
             // All commodity rates need to be divided by 1
@@ -39,14 +39,14 @@ function mapRatesToDataStructure(timeSeriesResponse: TimeSeriesResponse): Mapped
   }
 
 interface TimeseriesProps {
-    symbol: string;
+    commoditySymbol: string;
 }
 
-export default function Timeseries({symbol}: TimeseriesProps) {
+export default function Timeseries({commoditySymbol}: TimeseriesProps) {
     const startDate: string = getDateNDaysAgo(30);
     const endDate: string = getDateNDaysAgo(1); // Cannot use the current date as the endDate
 
-    const { status, data, error, isFetching } = useTimeseries(startDate, endDate, symbol);
+    const { status, data, error, isFetching } = useTimeseries(startDate, endDate, commoditySymbol);
 
     let mappedData: MappedTimeseriesData[] = [];
 
@@ -56,9 +56,9 @@ export default function Timeseries({symbol}: TimeseriesProps) {
 
     return (
         <div className="card">
-            <h1 className="text-center">Past 30 Days</h1>
+            <h2 className="text-center">Past 30 Days</h2>
             {status === "loading" ? ("Loading...") : error instanceof Error ? (<span>Error: {error.message}</span>) : !data || !data.rates ? ("No data available"): (
-            <ApexZoomableTimeseries startDate={startDate} endDate={endDate} symbol={symbol} data={mappedData}/>)}
+            <ApexZoomableTimeseries commoditySymbol={commoditySymbol} data={mappedData}/>)}
             <div> {isFetching ? "Background updating..." : " "}</div>
         </div>
     )

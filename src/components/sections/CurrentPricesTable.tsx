@@ -20,6 +20,7 @@ export default function CurrentPricesTable({data, updateCommoditySymbolState}: C
                     <tr>
                         <th>Commodity</th>
                         <th>USD</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +28,7 @@ export default function CurrentPricesTable({data, updateCommoditySymbolState}: C
                         <tr key={commodity}>
                             <td>{commodity}</td>
                             <td>{commodityValue}</td>
-                            <td><button onClick={() => handleButtonClick(commodity)}></button></td>
+                            <td><button className="button" onClick={() => handleButtonClick(commodity)}>View graph</button></td>
                         </tr>
                     ))}
                 </tbody>

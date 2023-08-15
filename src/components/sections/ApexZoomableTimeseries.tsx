@@ -1,24 +1,27 @@
-import {getDatesInRange} from '../../helpers'
 import { MappedTimeseriesData } from '../../interfaces/MappedTimeseriesData';
 import ReactApexChart from 'react-apexcharts';
 import _ from 'lodash';
 
 interface ApexZoomableTimeseriesProps{
-    startDate: string;
-    endDate: string;
-    symbol: string;
+    commoditySymbol: string;
     data: MappedTimeseriesData[]
 }
 
-export default function ApexZoomableTimeseries({startDate, endDate, symbol, data}: ApexZoomableTimeseriesProps) {
+export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoomableTimeseriesProps) {
 
-    const datesInRange = getDatesInRange(new Date(startDate), new Date(endDate));
+  const dates: string[] = [];
+
+  _.forEach(data, (data: MappedTimeseriesData) => {
+    dates.push(data.date);
+  });
+    console.log(dates);
 
     const numberValues: number[] = _.chain(data)
         .flatMap(_.values)
         .filter(_.isNumber)
         .filter((num) => num !== 1)
         .value();
+    console.log(numberValues);
 
     const options = {
         chart: {
@@ -29,7 +32,7 @@ export default function ApexZoomableTimeseries({startDate, endDate, symbol, data
             enabled: false
         },
         xaxis: {
-          categories: datesInRange,
+          categories: dates,
           labels: {
             style: {
                 colors: '#eee'
@@ -41,21 +44,25 @@ export default function ApexZoomableTimeseries({startDate, endDate, symbol, data
                 style: {
                     colors: '#eee'
                 }
-              }
+              },
+            title: {
+              text: 'USD',
+              style: {
+                color: '#eee'
+            }
+            }
         },
         title: {
-            text: symbol,
-            labels: {
-                style: {
-                    colors: '#eee'
-                }
-              }
+          text: commoditySymbol,
+            style: {
+              color: '#eee'
+            }
         }
       };
 
     const series = [
         {
-          name: symbol,
+          name: commoditySymbol,
           data: numberValues
         }
       ];
