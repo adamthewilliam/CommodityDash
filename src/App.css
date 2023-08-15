@@ -3,14 +3,14 @@
 .grid-container {
   background: #323230;
   font-family: "Poppins";
-  min-height: 100vh;
   overflow-y: auto;
+  min-height: 100vh;
   padding: 30px 60px;
   color:  #a8a8a8;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 1fr 80px;
-  gap: 50px 50px;
+  column-gap: 50px;
   align-items: center;
 }
 
