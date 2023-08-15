@@ -10,11 +10,13 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 1fr 80px;
-  gap: 50px;
+  gap: 50px 50px;
+  align-items: center;
 }
 
 .grid-container > div {
   max-height: 600px;
+  height: 100%;
 }
 
 /* These rules determine the column size for each component in the dashboard layout*/
