@@ -9,19 +9,20 @@ interface ApexZoomableTimeseriesProps{
 
 export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoomableTimeseriesProps) {
 
+  /* Get the dates to display on the xaxis */
   const dates: string[] = [];
-
   _.forEach(data, (data: MappedTimeseriesData) => {
     dates.push(data.date);
   });
-    console.log(dates);
+  
+  console.log(dates);
 
-    const numberValues: number[] = _.chain(data)
-        .flatMap(_.values)
-        .filter(_.isNumber)
-        .filter((num) => num !== 1)
-        .value();
-    console.log(numberValues);
+  /* Flatten the mapped timeseries data down to just the currency values */
+  const numberValues: number[] = _.chain(data)
+    .flatMap(_.values)
+    .filter(_.isNumber)
+    .filter((num) => num !== 1) /* Removes USD from the rates object returned from the api*/
+    .value();
 
     const options = {
         chart: {

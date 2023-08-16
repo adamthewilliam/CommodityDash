@@ -25,7 +25,7 @@ function useTimeseries(startDate: string, endDate: string, commoditySymbol: stri
         console.log(data);
 
         return data;
-    }, {cacheTime: 86400000}); // Only refresh cache every 24 hrs
+    }, {cacheTime: 86400000}); // Only refresh cache every 24 hrs - changes from 10 min updates will not be seen on the graph
 }
 
 function mapRatesToDataStructure(timeSeriesResponse: TimeSeriesResponse): MappedTimeseriesData[] {

@@ -22,6 +22,8 @@ function useCurrentPrices() {
             });
             data.rates = _.omit(data.rates, ['USD']);
 
+        console.log(data);
+
         return data;
     });
 }

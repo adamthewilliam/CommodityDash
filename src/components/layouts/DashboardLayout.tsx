@@ -3,13 +3,8 @@ import Footer from "../sections/Footer";
 import Header from "../sections/Header";
 import Timeseries from "../sections/Timeseries";
 import { useState } from "react";
-
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 
-/*
-Once the data is not fresh, it will trigger a refetch from the api.
-The API only provides updated data every 10 minutes so this is optimal for performance.
-*/
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -20,7 +15,6 @@ const queryClient = new QueryClient({
     }});
 
 export default function DashboardLayout() {
-
     const [commoditySymbol, setCommoditySymbol] = useState("WTIOIL");
 
     const updateCommoditySymbolState = (commoditySymbol: string) => {

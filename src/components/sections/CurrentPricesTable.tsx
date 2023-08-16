@@ -1,14 +1,12 @@
 import { LatestRateResponse } from "../../interfaces/LatestRateResponse";
 import CurrentPricesProps from "../../interfaces/CurrentPricesProps";
+import _ from 'lodash';
 
 interface CurrentPricesTableProps extends CurrentPricesProps {
     data: LatestRateResponse;
 }
 
 export default function CurrentPricesTable({data, updateCommoditySymbolState}: CurrentPricesTableProps) {
-    console.log(data);
-    console.log(Array.isArray(data.rates));
-
     const handleButtonClick = (commoditySymbol: string) => {
         updateCommoditySymbolState(commoditySymbol);
     }
@@ -24,7 +22,7 @@ export default function CurrentPricesTable({data, updateCommoditySymbolState}: C
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.entries(data.rates).map(([commodity, commodityValue]) => (
+                    {_.map(data.rates, (commodity, commodityValue) => (
                         <tr key={commodity}>
                             <td>{commodity}</td>
                             <td>{commodityValue}</td>
