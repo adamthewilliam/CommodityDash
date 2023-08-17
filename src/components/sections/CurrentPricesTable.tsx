@@ -22,11 +22,11 @@ export default function CurrentPricesTable({data, updateCommoditySymbolState}: C
                     </tr>
                 </thead>
                 <tbody>
-                    {_.map(data.rates, (commodity, commodityValue) => (
-                        <tr key={commodity}>
-                            <td>{commodity}</td>
+                    {_.map(data.rates, (commodityValue, commoditySymbol) => (
+                        <tr key={commoditySymbol}>
+                            <td>{commoditySymbol}</td>
                             <td>{commodityValue}</td>
-                            <td><button className="button" onClick={() => handleButtonClick(commodity)}>View graph</button></td>
+                            <td><button className="button" onClick={() => handleButtonClick(commoditySymbol)}>View graph</button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,28 +1,33 @@
-import { MappedTimeseriesData } from '../../interfaces/MappedTimeseriesData';
 import ReactApexChart from 'react-apexcharts';
 import _ from 'lodash';
+import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 
 interface ApexZoomableTimeseriesProps{
     commoditySymbol: string;
-    data: MappedTimeseriesData[]
+    data: TimeSeriesResponse['rates'];
 }
 
 export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoomableTimeseriesProps) {
 
   /* Get the dates to display on the xaxis */
+  /* Underscore prefix indiciates the variable is unintentionally used to avoid declaration warnings.*/
   const dates: string[] = [];
-  _.forEach(data, (data: MappedTimeseriesData) => {
-    dates.push(data.date);
+  _.forEach(data, (_timeseries, date) => {
+    dates.push(date);
   });
   
   console.log(dates);
 
   /* Flatten the mapped timeseries data down to just the currency values */
-  const numberValues: number[] = _.chain(data)
-    .flatMap(_.values)
-    .filter(_.isNumber)
-    .filter((num) => num !== 1) /* Removes USD from the rates object returned from the api*/
-    .value();
+  const numberValues: number[] = 
+    _.flatMap(data, (timeseries) => {
+      return _.map(timeseries, (commodityValue, commoditySymbol) => {
+        if(commoditySymbol !== "USD") {
+          return _.round(1 / Number(commodityValue), 2);
+        }
+        return undefined;
+      }).filter((value) => value !== undefined) as number[];
+      });
 
     const options = {
         chart: {
