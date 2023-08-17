@@ -2,8 +2,7 @@ import { useQuery} from '@tanstack/react-query'
 import axios from '../../http-common';
 import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 import { getDateNDaysAgo } from '../../helpers'
-import _ from 'lodash';
-import ApexZoomableTimeseries from './ApexZoomableTimeseries';
+import TimeseriesGraph from './TimeseriesGraph';
 
 const API_KEY = process.env.REACT_APP_COMMODITIES_API_ACCESS_KEY;
 
@@ -12,14 +11,6 @@ function useTimeseries(startDate: string, endDate: string, commoditySymbol: stri
     return useQuery(["timeseries", [commoditySymbol]], async (): Promise<TimeSeriesResponse> => {
         const { data }: {data: TimeSeriesResponse} = await axios.get(`/timeseries?access_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}&base=USD&symbols=${commoditySymbol}`)
             .then((response => response.data));
-
-            // All commodity rates need to be divided by 1
-            // Also I don't need the rate of the USD
-            /*data.rates = _.forEach(data.rates, (date) => {
-                _.forEach(date, (value, commodity) => {
-                        date[commodity] = (1 / Number(value)).toFixed(2);
-                })
-            });*/
 
         console.log(data);
 
@@ -41,7 +32,7 @@ export default function Timeseries({commoditySymbol}: TimeseriesProps) {
         <div className="timeseries card">
             <h2 className="text-center">Past 30 Days</h2>
             {status === "loading" ? ("Loading...") : error instanceof Error ? (<span>Error: {error.message}</span>) : !data || !data.rates ? ("No data available"): (
-            <ApexZoomableTimeseries commoditySymbol={commoditySymbol} data={data.rates}/>)}
+            <TimeseriesGraph commoditySymbol={commoditySymbol} data={data.rates}/>)}
             <div> {isFetching ? "Background updating..." : " "}</div>
         </div>
     )
