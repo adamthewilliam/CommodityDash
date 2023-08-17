@@ -2,12 +2,12 @@ import ReactApexChart from 'react-apexcharts';
 import _ from 'lodash';
 import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 
-interface ApexZoomableTimeseriesProps{
+interface TimeseriesGraphProps{
     commoditySymbol: string;
     data: TimeSeriesResponse['rates'];
 }
 
-export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoomableTimeseriesProps) {
+export default function TimeseriesGraph({commoditySymbol, data}: TimeseriesGraphProps) {
 
   /* Get the dates to display on the xaxis */
   /* Underscore prefix indiciates the variable is unintentionally used to avoid declaration warnings.*/
@@ -18,7 +18,9 @@ export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoom
   
   console.log(dates);
 
-  /* Flatten the mapped timeseries data down to just the currency values */
+  /* Flatten the mapped timeseries data down to just the currency values.*/
+  /* Remove the USD currency from the returned commodities for a timeseries date.*/
+  /* Divide the commodity value by 1 to display the true value. This is because the api returns the commodity value in the base currency */
   const numberValues: number[] = 
     _.flatMap(data, (timeseries) => {
       return _.map(timeseries, (commodityValue, commoditySymbol) => {
@@ -31,7 +33,7 @@ export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoom
 
     const options = {
         chart: {
-          id: 'basic-bar',
+          id: 'timeseries-graph',
           stacked: false,
           height: '100%'
         },
