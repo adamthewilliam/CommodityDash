@@ -4,10 +4,11 @@
 
 # Getting Started with Commodity Dash
 
-Sign up to commodities-api here: [https://commodities-api.com], there is a 7 day free trial for the proffesional pricing tier.
-Once you have signed up, you will need to find your API access key and create an .env file in the root of this application with a variable
-called "REACT_APP_COMMODITIES_API_ACCESS_KEY" with the value of your API access key. Now run the application and have fun looking at the commodity data!
+Sign up to commodities-api here: [https://commodities-api.com]. There is a 7 day free trial for the professional pricing tier.
+Once you have signed up, you will need to find your API access key and create an .env file in the root of this application.
+The .env file will need to contain a variable called "REACT_APP_COMMODITIES_API_ACCESS_KEY" with the value of your API access key.
 
+Now run the application and have fun looking at the commodity data!
 
 ## Available Scripts
 
@@ -46,8 +47,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
