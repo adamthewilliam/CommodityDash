@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap');
 
+/* ### Grids ### */
 .grid-container {
   background: #323230;
   font-family: "Poppins";
@@ -58,25 +59,6 @@
   grid-column: 1 / span 12;
 }
 
-.currentPrices {
-  min-height:400px;
-}
-.timeseries {
-  min-height:400px;
-}
-
-.card {
-  padding: 15px 15px;
-  border-radius: 8px;
-  border-width: 5px;
-  box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
-  background: #1e1e1e;
-}
-
-.text-center {
-  text-align: center;
-}
-
 .grid-table {
   display:grid;
   grid-template-columns: 100%;
@@ -100,6 +82,7 @@
   align-items: center;
 }
 
+/* ### Table styling ### */
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -125,6 +108,25 @@
   border-bottom: 2px solid #323230;
 }
 
+.currentPrices {
+  min-height:400px;
+}
+.timeseries {
+  min-height:400px;
+}
+
+.card {
+  padding: 15px 15px;
+  border-radius: 8px;
+  border-width: 5px;
+  box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
+  background: #1e1e1e;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .button{
 display: inline-block;
 outline: 0;
@@ -141,5 +143,3 @@ padding: 0 20px;
 .button:hover {
     background-color: #772ce8;
 }
-
-
