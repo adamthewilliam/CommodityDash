@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![commoditydashimage.png](https://i.postimg.cc/WzjG42cW/commoditydashimage.png)](https://postimg.cc/MMPMPJTV)
+
+# Getting Started with Commodity Dash
+
+Sign up to commodities-api here: [https://commodities-api.com], there is a 7 day free trial for the proffesional pricing tier.
+Once you have signed up, you will need to find your API access key and create an .env file in the root of this application with a variable
+called "REACT_APP_COMMODITIES_API_ACCESS_KEY" with the value of your API access key. Now run the application and have fun looking at the commodity data!
+
 
 ## Available Scripts
 

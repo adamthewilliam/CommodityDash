@@ -3,32 +3,66 @@
 .grid-container {
   background: #323230;
   font-family: "Poppins";
+  overflow-y: auto;
   min-height: 100vh;
   padding: 30px 60px;
   color:  #a8a8a8;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 60px 1fr 60px;
-  gap: 50px;
+  grid-template-rows: 80px 1fr 80px;
+  column-gap: 50px;
+  align-items: center;
 }
 
 .grid-container > div {
-  max-height: 700px;
+  max-height: 600px;
+  height: 100%;
 }
 
 /* These rules determine the column size for each component in the dashboard layout*/
 .grid-container > div:nth-child(1) {
   grid-column: 1 / span 12;
-  
 }
-.grid-container > div:nth-child(2) {
-  grid-column: 1 / span 5;
+
+/* mobile view */
+@media only screen and (max-width: 812px) {
+  .grid-container > div:nth-child(2) {
+    grid-column: 1 / span 12;
+  }
+  .grid-container > div:nth-child(3) {
+    grid-column: 1 / span 12;
+  }
 }
-.grid-container > div:nth-child(3) {
-  grid-column: 6 / span 12;
+
+/* Tablet view */
+@media only screen and (min-width: 640px) {
+  .grid-container > div:nth-child(2) {
+    grid-column: 1 / span 12;
+  }
+  .grid-container > div:nth-child(3) {
+    grid-column: 1 / span 12;
+  }
 }
+
+ /* Desktop view */
+@media only screen and (min-width: 992px) {
+  .grid-container > div:nth-child(2) {
+    grid-column: 1 / span 5;
+  }
+  .grid-container > div:nth-child(3) {
+    grid-column: 6 / span 7;
+  }
+}
+
 .grid-container > div:nth-child(4) {
   grid-column: 1 / span 12;
+}
+
+.currentPrices {
+  min-height:400px;
+}
+.timeseries {
+  min-height:400px;
 }
 
 .card {
@@ -61,7 +95,9 @@
 }
 .grid-table > tbody > tr > td {
   width:100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .styled-table {
@@ -88,3 +124,22 @@
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid #323230;
 }
+
+.button{
+display: inline-block;
+outline: 0;
+border: none;
+cursor: pointer;
+font-weight: 600;
+border-radius: 4px;
+font-size: 13px;
+height: 30px;
+background-color: #59595d;
+color: white;
+padding: 0 20px;
+}
+.button:hover {
+    background-color: #772ce8;
+}
+
+

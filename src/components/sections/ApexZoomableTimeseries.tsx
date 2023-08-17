@@ -1,35 +1,45 @@
-import {getDatesInRange} from '../../helpers'
-import { MappedTimeseriesData } from '../../interfaces/MappedTimeseriesData';
 import ReactApexChart from 'react-apexcharts';
 import _ from 'lodash';
+import { TimeSeriesResponse } from '../../interfaces/TimeSeriesResponse';
 
 interface ApexZoomableTimeseriesProps{
-    startDate: string;
-    endDate: string;
-    symbol: string;
-    data: MappedTimeseriesData[]
+    commoditySymbol: string;
+    data: TimeSeriesResponse['rates'];
 }
 
-export default function ApexZoomableTimeseries({startDate, endDate, symbol, data}: ApexZoomableTimeseriesProps) {
+export default function ApexZoomableTimeseries({commoditySymbol, data}: ApexZoomableTimeseriesProps) {
 
-    const datesInRange = getDatesInRange(new Date(startDate), new Date(endDate));
+  /* Get the dates to display on the xaxis */
+  /* Underscore prefix indiciates the variable is unintentionally used to avoid declaration warnings.*/
+  const dates: string[] = [];
+  _.forEach(data, (_timeseries, date) => {
+    dates.push(date);
+  });
+  
+  console.log(dates);
 
-    const numberValues: number[] = _.chain(data)
-        .flatMap(_.values)
-        .filter(_.isNumber)
-        .filter((num) => num !== 1)
-        .value();
+  /* Flatten the mapped timeseries data down to just the currency values */
+  const numberValues: number[] = 
+    _.flatMap(data, (timeseries) => {
+      return _.map(timeseries, (commodityValue, commoditySymbol) => {
+        if(commoditySymbol !== "USD") {
+          return _.round(1 / Number(commodityValue), 2);
+        }
+        return undefined;
+      }).filter((value) => value !== undefined) as number[];
+      });
 
     const options = {
         chart: {
           id: 'basic-bar',
-          stacked: false
+          stacked: false,
+          height: '100%'
         },
         dataLabels: {
             enabled: false
         },
         xaxis: {
-          categories: datesInRange,
+          categories: dates,
           labels: {
             style: {
                 colors: '#eee'
@@ -41,21 +51,25 @@ export default function ApexZoomableTimeseries({startDate, endDate, symbol, data
                 style: {
                     colors: '#eee'
                 }
-              }
+              },
+            title: {
+              text: 'USD',
+              style: {
+                color: '#eee'
+            }
+            }
         },
         title: {
-            text: symbol,
-            labels: {
-                style: {
-                    colors: '#eee'
-                }
-              }
+          text: commoditySymbol,
+            style: {
+              color: '#eee'
+            }
         }
       };
 
     const series = [
         {
-          name: symbol,
+          name: commoditySymbol,
           data: numberValues
         }
       ];
