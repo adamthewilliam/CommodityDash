@@ -11,6 +11,8 @@ export default function TimeseriesGraph({commoditySymbol, data}: TimeseriesGraph
 
   /* Get the dates to display on the xaxis */
   /* Underscore prefix indiciates the variable is unintentionally used to avoid declaration warnings.*/
+  
+  /* Refactor this logic to the parent component to keep this component dumb*/
   const dates: string[] = [];
   _.forEach(data, (_timeseries, date) => {
     dates.push(date);
@@ -21,6 +23,8 @@ export default function TimeseriesGraph({commoditySymbol, data}: TimeseriesGraph
   /* Flatten the mapped timeseries data down to just the currency values.*/
   /* Remove the USD currency from the returned commodities for a timeseries date.*/
   /* Divide the commodity value by 1 to display the true value. This is because the api returns the commodity value in the base currency */
+
+  /* Refactor this logic to the parent component to keep this component dumb*/
   const numberValues: number[] = 
     _.flatMap(data, (timeseries) => {
       return _.map(timeseries, (commodityValue, commoditySymbol) => {
